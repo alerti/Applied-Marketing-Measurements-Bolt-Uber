@@ -1,13 +1,9 @@
-
-import pandas as pd
-import numpy as np
-import os
-import sys
-from src.config.config import  Config
-from pathlib import Path
-from dotenv import find_dotenv, load_dotenv
+#%%
 import logging
-
+import sys
+import numpy as np
+import pandas as pd
+from src.config.config import Config
 
 
 class DataFunctions:
@@ -21,7 +17,7 @@ class DataFunctions:
         datainstance = Config()
         input_filepath = datainstance.get_data_path()
         self.logger.info('Reading data from {}'.format(input_filepath))
-        data = pd.read_csv(input_filepath,  index_col = 0)
+        data = pd.read_csv(input_filepath, parse_dates=['date'], index_col='date')
         return data
 
     def write_data(self, data, output_filepath):
@@ -98,12 +94,9 @@ class DataFunctions:
 
     def test_write_data(self):
 
-            data = pd.DataFrame({'feature1': [1, 2, 3], 'feature2': [4, 5, 6]})
-            data_functions = DataFunctions()
-            data_functions.write_data(data, 'data/processed/data.csv')
-            return None
+        data = pd.DataFrame({'feature1': [1, 2, 3], 'feature2': [4, 5, 6]})
+        data_functions = DataFunctions()
+        data_functions.write_data(data, 'data/processed/data.csv')
+        return None
 
-
-
-
-#%%
+# %%
