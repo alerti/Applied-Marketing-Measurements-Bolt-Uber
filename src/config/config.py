@@ -1,33 +1,30 @@
-
-
 import logging
 import os
 from pathlib import Path
 
 import os
 import fnmatch
-class Config:
 
-    rt_dir = '/Volumes/Data/DataSpell/bolt_–_senior_data_analyst,_applied_marketing_measurements_'  # root directory
-    filname = 'Test Task - Marketing Measurement - DF.csv'
+
+class Config:
+    rt_dir = '/Volumes/Data/'  # root directory
+    fil_name = 'Test Task - Marketing Measurement - DF.csv'
+
     def __init__(self):
+
         self.logger = logging.getLogger(__name__)
         self.logger.info('Config class created')
         self.logger.info('Config class created')
         self.logger.info('Project directory: {}')
         self.logger.info('Loading .env file')
 
-    def get_data_path(self, root_dir = rt_dir, filename = filname):
+    def get_data_path(self, root_dir=rt_dir, filename=fil_name):
         link = ''
         for root, dirs, files in os.walk(root_dir):
             for file in files:
                 if fnmatch.fnmatch(file, filename):
                     link = os.path.join(root, file)
         return link
-
-
-
-
 
     def get_project_dir(self):
         """ Get project directory
@@ -90,12 +87,12 @@ class Config:
         """
         self.logger.info('Getting log level')
 
+
 Config().get_data_path()
 
-import  pandas as pd
+import pandas as pd
+
 data = pd.read_csv(Config().get_data_path())
 data.head()
 
-
-
-#%%
+# %%
